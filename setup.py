@@ -40,7 +40,7 @@ class Setup():
         print("The Creation Tool is finished.  Please restart to enable your selected features.")
 
     # This function makes the kiosk start automatically at user login
-    def autostart(user, url):
+    def autostart(self, user, url):
 
         directory = "/home/" + user + "/.config/autostart"
         filename = directory + "/kiosk.desktop"
@@ -66,17 +66,17 @@ class Setup():
     
     # This function makes the selected user auto login.
     # It calls a shell script and enables it to run with root privileges.
-    def autologin(user):
+    def autologin(self, user):
         subprocess.Popen(['pkexec', "\"./enable-autologin.sh " + user + "\""])
 
     # This function enables automatic updates.
     # It calls a shell script and enables it to run with root privileges.
-    def autoupdate():
+    def autoupdate(self):
         subprocess.Popen(['pkexec', "\"./enable-autoupdates.sh \""])
 
     # This function adds a cronjob that refreshes the kiosk every so many minutes.
     # It requires root privileges to actually update the selected users crontab.
-    def refresh(interval, user):
+    def refresh(self, interval, user):
         directory = "/home/" + user
         filename =  directory + "/.refresh-kiosk.sh"
         opened = false
