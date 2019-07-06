@@ -44,7 +44,7 @@ class Setup():
 
         directory = "/home/" + user + "/.config/autostart"
         filename = directory + "/kiosk.desktop"
-        opened = false
+        opened = False
     
         if not os.path.exists(directory):
             os.makedirs(directory)
@@ -54,7 +54,7 @@ class Setup():
         while not opened:
             if not os.path.isfile(filename):
                 desktop_file = open(filename, "w")
-                opened = true
+                opened = True
             else:
                 filename = directory + "/" + input("ERROR: File " + filename + "exists.  Please enter new filename: ") + ".desktop"
     
@@ -79,12 +79,12 @@ class Setup():
     def refresh(self, interval, user):
         directory = "/home/" + user
         filename =  directory + "/.refresh-kiosk.sh"
-        opened = false
+        opened = False
 
         while not opened:
             if not os.path.isfile(filename):
                 refresh_file = open(filename, "w")
-                opened = true
+                opened = True
             else:
                 filename = directory + "/." + input("ERROR: File " + filename + "exists.  Please enter new filename: ")
 
@@ -96,12 +96,13 @@ class Setup():
         
         refresh_filename = filename
 
+        opened = False
         filename =  directory + "/.cronkiosk"
 
         while not opened:
             if not os.path.isfile(filename):
                 cron_file = open(filename, "w")
-                opened = true
+                opened = True
             else:
                 filename = directory + "/." + input("ERROR: File " + filename + "exists.  Please enter new filename: ")
 
