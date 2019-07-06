@@ -21,6 +21,8 @@ class Setup():
         # Get the user for autologin        
         self.user_autologin = input("Please enter the user to enable auto login for: ")
 
+        # Get user choice for auto updates
+        self.choice_autoupdate = input("Would you like to enable automatic updates? (y/n) ")
 
         if self.user_autostart:
             self.autostart(self.user_autostart, self.presentation_url)
@@ -29,6 +31,9 @@ class Setup():
         
         if self.user_autologin:
             self.autologin(self.user_autologin)
+        
+        if self.choice_autoupdate and not self.choice_autoupdate.contains("n"):
+            self.autoupdate()
 
 
 
@@ -63,6 +68,11 @@ class Setup():
     # It calls a shell script and enables it to run with root privileges.
     def autologin(user):
         subprocess.Popen(['pkexec', "\"./enable-autologin.sh " + user + "\""])
+
+    # This function enables automatic updates.
+    # It calls a shell script and enables it to run with root privileges.
+    def autoupdate():
+        subprocess.Popen(['pkexec', "\"./enable-autoupdates.sh \""])
 
     # This function adds a cronjob that refreshes the kiosk every so many minutes.
     # It requires root privileges to actually update the selected users crontab.
