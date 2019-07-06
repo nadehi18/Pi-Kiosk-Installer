@@ -51,8 +51,8 @@ class Setup():
     
         # Creates a desktop file in the autostart dir to run the kiosk automatically
         # Checks if the default filename exists and if it does, the program 
-        while !opened:
-            if !os.path.isfile(filename):
+        while not opened:
+            if not os.path.isfile(filename):
                 desktop_file = open(filename, "w")
                 opened = true
             else:
@@ -81,8 +81,8 @@ class Setup():
         filename =  directory + "/.refresh-kiosk.sh"
         opened = false
 
-         while !opened:
-            if !os.path.isfile(filename):
+         while not opened:
+            if not os.path.isfile(filename):
                 refresh_file = open(filename, "w")
                 opened = true
             else:
@@ -98,8 +98,8 @@ class Setup():
 
         filename =  directory + "/.cronkiosk"
 
-        while !opened:
-            if !os.path.isfile(filename):
+        while not opened:
+            if not os.path.isfile(filename):
                 cron_file = open(filename, "w")
                 opened = true
             else:
