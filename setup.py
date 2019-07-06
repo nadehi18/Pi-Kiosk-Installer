@@ -4,7 +4,7 @@ import os
 from subprocess import Popen
 
 class Setup():
-    def __init__():
+    def __init__(self):
 
         # Get the url of the presentation
         self.presentation_url = input("Please enter the url of the presentation to use for the kiosk: ")
