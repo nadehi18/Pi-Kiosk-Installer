@@ -92,7 +92,7 @@ class Setup():
         refresh_file.write("DISPLAY=:0 xdotool getactivewindow key F5")
         refresh_file.close()
 
-        Popen(['chmod', "+x "+ filename])
+        Popen(['chmod', " +x "+ filename])
         
         refresh_filename = filename
 
@@ -104,7 +104,7 @@ class Setup():
                 cron_file = open(filename, "w")
                 opened = True
             else:
-                filename = directory + "/." + input("ERROR: File " + filename + "exists.  Please enter new filename: ")
+                filename = directory + "/." + input("ERROR: File " + filename + " exists.  Please enter new filename: ")
 
         cron_file.write("*/" + str(interval) + " * * * *  " + refresh_filename)
         cron_file.close()
