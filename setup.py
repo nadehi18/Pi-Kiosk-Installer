@@ -32,7 +32,7 @@ class Setup():
         if self.user_autologin:
             self.autologin(self.user_autologin)
         
-        if self.choice_autoupdate and not self.choice_autoupdate.contains("n"):
+        if self.choice_autoupdate and not "n" in self.choice_autoupdate and not "N" in self.choice_autoupdate:
             self.autoupdate()
 
 
