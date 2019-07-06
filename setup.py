@@ -86,7 +86,7 @@ class Setup():
                 refresh_file = open(filename, "w")
                 opened = True
             else:
-                filename = directory + "/." + input("ERROR: File " + filename + "exists.  Please enter new filename: ")
+                filename = directory + "/." + input("ERROR: File " + filename + "exists.  Please enter new filename: ") + ".sh"
 
         refresh_file.write("#!/bin/bash")
         refresh_file.write("DISPLAY=:0 xdotool getactivewindow key F5")
@@ -106,7 +106,7 @@ class Setup():
             else:
                 filename = directory + "/." + input("ERROR: File " + filename + "exists.  Please enter new filename: ")
 
-        cron_file.write("*/" + interval + " * * * *  " + refresh_filename)
+        cron_file.write("*/" + str(interval) + " * * * *  " + refresh_filename)
         cron_file.close()
 
         Popen(['pkexec', "\"crontab -u " + user + " " + filename + "\""])
