@@ -58,9 +58,9 @@ class Setup():
             else:
                 filename = directory + "/" + input("ERROR: File " + filename + "exists.  Please enter new filename: ") + ".desktop"
     
-        desktop_file.write("[Desktop Entry]")
-        desktop_file.write("Type=Application")
-        desktop_file.write("Name=Kiosk")
+        desktop_file.write("[Desktop Entry]" + '\n')
+        desktop_file.write("Type=Application" + '\n')
+        desktop_file.write("Name=Kiosk" + '\n')
         desktop_file.write("Exec=chromium-browser --kiosk " + url)
         desktop_file.close()
     
@@ -88,7 +88,7 @@ class Setup():
             else:
                 filename = directory + "/." + input("ERROR: File " + filename + "exists.  Please enter new filename: ") + ".sh"
 
-        refresh_file.write("#!/bin/bash")
+        refresh_file.write("#!/bin/bash"  + '\n')
         refresh_file.write("DISPLAY=:0 xdotool getactivewindow key F5")
         refresh_file.close()
 
