@@ -92,7 +92,7 @@ class Setup():
         refresh_file.write("DISPLAY=:0 xdotool getactivewindow key F5")
         refresh_file.close()
 
-        Popen(['chmod', " +x "+ filename])
+        Popen(['chmod', "+x " + filename])
         
         refresh_filename = filename
 
