@@ -67,12 +67,12 @@ class Setup():
     # This function makes the selected user auto login.
     # It calls a shell script and enables it to run with root privileges.
     def autologin(self, user):
-        Popen(["pkexec", "./enable-autologin.sh", user])
+        Popen(["pkexec", os.path.dirname(os.path.realpath(__file__)) + "/enable-autologin.sh", user])
 
     # This function enables automatic updates.
     # It calls a shell script and enables it to run with root privileges.
     def autoupdate(self):
-        Popen(["pkexec", "./enable-autoupdates.sh"])
+        Popen(["pkexec", os.path.dirname(os.path.realpath(__file__)) + "/enable-autoupdates.sh"])
 
     # This function adds a cronjob that refreshes the kiosk every so many minutes.
     # It requires root privileges to actually update the selected users crontab.
