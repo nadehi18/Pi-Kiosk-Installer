@@ -106,7 +106,10 @@ class Setup():
             else:
                 filename = directory + "/." + input("ERROR: File " + filename + " exists.  Please enter new filename: ")
 
-        cron_file.write("*/" + str(interval) + " * * * *  " + refresh_filename)
+        if interval > 1:
+            cron_file.write("*/" + str(interval) + " * * * *  " + refresh_filename)
+        else:
+            cron_file.write("* * * * *  " + refresh_filename)
         cron_file.close()
 
         Popen(["pkexec", "crontab", "-u ", user, filename])
