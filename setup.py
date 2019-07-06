@@ -81,7 +81,7 @@ class Setup():
         filename =  directory + "/.refresh-kiosk.sh"
         opened = false
 
-         while not opened:
+        while not opened:
             if not os.path.isfile(filename):
                 refresh_file = open(filename, "w")
                 opened = true
