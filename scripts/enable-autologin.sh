@@ -5,8 +5,8 @@
 # This script MUST be run as root or else it will not work, at all.
 
 
-match='[LightDM]'
-insert='autologin-user=$1\nautologin-user-timeout=0'
+match="[LightDM]"
+insert="autologin-user=$1\nautologin-user-timeout=0"
 
 sed -i "s/$match/$match\n$insert" /etc/lightdm/lightdm.conf
 dpkg-reconfigure lightdm 
