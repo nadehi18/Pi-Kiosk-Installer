@@ -137,10 +137,10 @@ class Setup():
             subprocess.call(["pkexec", os.path.dirname(os.path.realpath("__file__")) + "/scripts/install-package.sh", package_name])
             print('\n' + self.divider + '\n')
     
+    # Checks if the default filename exists and if it does, the program prompts to overwrite or rename the files 
     def check_file_exists(self, filename, directory, extension):
         opened = False
     
-        # Checks if the default filename exists and if it does, the program prompts to overwrite or rename the files 
         while not opened:
             if os.path.isfile(filename):
                 replace = input("ERROR: File " + filename + "exists.  Would you like to replace? (y/n)")
@@ -148,7 +148,7 @@ class Setup():
                     opened = True
                 else:
                     name = input("Please enter new filename: ")
-                    if name = "":
+                    if name == "":
                         name = "_"
                     filename = directory + name + extension
             else:
