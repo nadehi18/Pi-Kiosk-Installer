@@ -64,10 +64,7 @@ class Setup():
                 filename = directory + "/" + input("ERROR: File " + filename + "exists.  Please enter new filename: ") + ".desktop"
         desktop_file.close()
 
-        if user == os.getenv("USER"):
-             subprocess.call([os.path.dirname(os.path.realpath("__file__")) + "/scripts/enable-autostart.sh", filename, url, user])
-        else:    
-            subprocess.call(["pkexec", os.path.dirname(os.path.realpath("__file__")) + "/scripts/enable-autostart.sh", filename, url, user])
+        subprocess.call(["pkexec", os.path.dirname(os.path.realpath("__file__")) + "/scripts/enable-autostart.sh", filename, url, user])
 
     
     # This function makes the selected user auto login.
@@ -99,10 +96,7 @@ class Setup():
                 filename = directory + "/." + input("ERROR: File " + filename + "exists.  Please enter new filename: ") + ".sh"
         refresh_file.close()
 
-        if user == os.getenv("USER"):
-             subprocess.call([os.path.dirname(os.path.realpath("__file__")) + "/scripts/enable-refresh.sh", filename, user])
-        else:    
-            subprocess.call(["pkexec", os.path.dirname(os.path.realpath("__file__")) + "/scripts/enable-refresh.sh", filename, user])
+        subprocess.call(["pkexec", os.path.dirname(os.path.realpath("__file__")) + "/scripts/enable-refresh.sh", filename, user])
         
         refresh_filename = filename
 
