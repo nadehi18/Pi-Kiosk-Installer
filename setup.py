@@ -68,18 +68,13 @@ class Setup():
         filename = directory + "/kiosk.desktop"
         opened = False
     
-        if not os.path.exists(directory):
-            os.makedirs(directory)
-    
         # Creates a desktop file in the autostart dir to run the kiosk automatically
         # Checks if the default filename exists and if it does, the program 
         while not opened:
-            if not os.path.isfile(filename):
-                desktop_file = open(filename, "w")
-                opened = True
-            else:
+            if os.path.isfile(filename):
                 filename = directory + "/" + input("ERROR: File " + filename + "exists.  Please enter new filename: ") + ".desktop"
-        desktop_file.close()
+            else:
+                opened = True
 
         subprocess.call(["pkexec", os.path.dirname(os.path.realpath("__file__")) + "/scripts/enable-autostart.sh", filename, url, user])
 
@@ -106,12 +101,10 @@ class Setup():
         opened = False
 
         while not opened:
-            if not os.path.isfile(filename):
-                refresh_file = open(filename, "w")
-                opened = True
-            else:
+            if os.path.isfile(filename):
                 filename = directory + "/." + input("ERROR: File " + filename + "exists.  Please enter new filename: ") + ".sh"
-        refresh_file.close()
+            else:
+                opened = True
 
         subprocess.call(["pkexec", os.path.dirname(os.path.realpath("__file__")) + "/scripts/enable-refresh.sh", filename, user])
         
@@ -121,16 +114,31 @@ class Setup():
         filename =  directory + "/.cronkiosk"
 
         while not opened:
-            if not os.path.isfile(filename):
-                cron_file = open(filename, "w")
-                opened = True
-            else:
+            if os.path.isfile(filename):
                 filename = directory + "/." + input("ERROR: File " + filename + " exists.  Please enter new filename: ")
-        cron_file.close()
+            else:
+                opened = True
 
         subprocess.call(["pkexec", os.path.dirname(os.path.realpath("__file__")) + "/scripts/install-crontab.sh", user, filename, str(interval), refresh_filename])
 
         os.remove(filename)
+
+    def auto_hide_mouse(self, user, filename):
+        self.ensure_package_installed("unclutter")
+
+        directory = "/home/" + user + "/.config/autostart"
+        filename = directory + "/kiosk.desktop"
+        opened = False
+    
+        # Creates a desktop file in the autostart dir to hide the cursor automatically
+        # Checks if the default filename exists and if it does, the program prompts to rename the files 
+        while not opened:
+            if os.path.isfile(filename):
+                filename = directory + "/" + input("ERROR: File " + filename + "exists.  Please enter new filename: ") + ".desktop"
+            else:
+                opened = True
+
+        subprocess.call(["pkexec", os.path.dirname(os.path.realpath("__file__")) + "/scripts/enable-hidecursor.sh", filename, user])
 
     def ensure_package_installed(self, package_name):
         cache = apt.Cache()
