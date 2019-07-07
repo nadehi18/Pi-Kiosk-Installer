@@ -39,6 +39,14 @@ class Setup():
             if self.refresh_interval:
                     self.refresh(self.refresh_interval, self.user_autostart)
 
+            print('\n' + self.divider + '\n')
+
+            # Get the user to hide the cursor for.
+            self.auto_hide_user = input("Please enter the user to automatically hide the cursor for: ")
+            
+            if self.auto_hide_user:
+                    self.auto_hide_mouse(self.auto_hide_user)
+
             print('\n' + self.divider + '\n')    
             
             # Get the user for autologin        
