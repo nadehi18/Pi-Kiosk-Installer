@@ -6,7 +6,8 @@
 
 
 match="[LightDM]"
-insert="autologin-user=$1\nautologin-user-timeout=0"
-
-sed -i "s/$match/$match\n$insert/" /etc/lightdm/lightdm.conf
+insert="autologin-user=$1"
+file="/etc/lightdm/lightdm.conf"
+sed -i "/autologin-user/d" $file
+sed -i -e "/^$match$/a"$'\\\n'"$insert"$'\n' "$file"
 dpkg-reconfigure lightdm 
