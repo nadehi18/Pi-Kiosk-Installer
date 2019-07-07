@@ -109,7 +109,7 @@ class Setup():
         if int(interval) > 1:
             cron_file.write("*/" + str(interval) + " * * * *  " + refresh_filename + '\n')
         else:
-            cron_file.write("* * * * *  " + refresh_filename)
+            cron_file.write("* * * * *  " + refresh_filename + '\n')
         cron_file.close()
 
         Popen(["pkexec", "crontab", "-u ", user, filename])
