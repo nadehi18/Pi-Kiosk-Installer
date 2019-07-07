@@ -111,7 +111,7 @@ class Setup():
                 filename = directory + "/." + input("ERROR: File " + filename + " exists.  Please enter new filename: ")
         cron_file.close()
 
-        subprocess.call(["pkexec", os.path.dirname(os.path.realpath("__file__")) + "/scripts/install-crontab.sh", user, filename, int(interval), refresh_filename])
+        subprocess.call(["pkexec", os.path.dirname(os.path.realpath("__file__")) + "/scripts/install-crontab.sh", user, filename, str(interval), refresh_filename])
 
         os.remove(filename)
 
