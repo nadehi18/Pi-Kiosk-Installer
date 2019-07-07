@@ -122,9 +122,7 @@ class Setup():
         os.remove(filename)
 
     def ensure_package_installed(self, package_name):
-        cache = apt.cache.Cache()
-        cache.update()
-        cache.open()
+        cache = apt.Cache()
         package = cache[package_name]
         if not package.is_installed:
             print("The " + package_name + "package is not installed.  Installing now...")
