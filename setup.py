@@ -19,7 +19,7 @@ class Setup():
             print('\n' + self.divider + '\n')
 
             # Get the url of the presentation
-            self.presentation_url = input("Please enter the url of the presentation to use for the kiosk: ")
+            self.presentation_url = input("Please enter the url of the website to use for the kiosk: ")
         
             # Can't auto start the kiosk if there is no powerpoint
             if self.presentation_url:
@@ -34,7 +34,7 @@ class Setup():
             print('\n' + self.divider + '\n')
             
             # Get the auto refresh interval in minutes.
-            self.refresh_interval = input("Please enter the interval in minutes that you want the kiosk to refresh the Google Slides presentation: ")
+            self.refresh_interval = input("Please enter the interval in minutes that you want the kiosk to refresh: ")
             
             if self.refresh_interval:
                     self.refresh(self.refresh_interval, self.user_autostart)
@@ -58,6 +58,8 @@ class Setup():
             print('\n' + self.divider + '\n')
             
             print("The Creation Tool is finished.  Please restart to enable your selected features.")
+
+            print('\n' + self.divider + '\n')
 
     # This function makes the kiosk start automatically at user login
     def auto_start(self, user, url):
