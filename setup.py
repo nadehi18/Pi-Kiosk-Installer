@@ -106,7 +106,7 @@ class Setup():
             else:
                 filename = directory + "/." + input("ERROR: File " + filename + " exists.  Please enter new filename: ")
 
-        if interval > 1:
+        if int(interval) > 1:
             cron_file.write("*/" + str(interval) + " * * * *  " + refresh_filename)
         else:
             cron_file.write("* * * * *  " + refresh_filename)
