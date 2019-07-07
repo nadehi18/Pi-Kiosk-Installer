@@ -9,5 +9,5 @@ match="[LightDM]"
 insert="autologin-user=$1"
 file="/etc/lightdm/lightdm.conf"
 sed -i "/autologin-user/d" $file
-sed -i -e "/^$match$/a"$'\\\n'"$insert"$'\n' "$file"
+sed "/$match/a $insert" $file
 dpkg-reconfigure lightdm 
