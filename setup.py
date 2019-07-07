@@ -27,7 +27,7 @@ class Setup():
         if self.user_autostart:
             self.autostart(self.user_autostart, self.presentation_url)
             if self.refresh_interval:
-                self.refresh(self.refresh_interval, self.user_autologin)
+                self.refresh(self.refresh_interval, self.user_autostart)
         
         if self.user_autologin:
             self.autologin(self.user_autologin)
