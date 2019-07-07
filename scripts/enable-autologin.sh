@@ -5,7 +5,7 @@
 # This script MUST be run as root or else it will not work, at all.
 
 
-match="\<\[Seat\:\*\]\>"
+match="\[Seat\:\*\]\n"
 insert="autologin-user=$1"
 file="/etc/lightdm/lightdm.conf"
 sed -i "/autologin-user/d" $file
