@@ -9,12 +9,14 @@ class Setup():
 
         if cli:
 
-            print('\n' + '-' * 20 + '\n')
+            self.divider = '-' * 40
+
+            print('\n' + self.divider + '\n')
 
             print("Welcome to the Raspberry Pi Kiosk Creation Tool!")
             print("If you do not wish to enable a feature, just leave the prompt blank and press [ENTER].")
         
-            print('\n' + '-' * 20 + '\n')
+            print('\n' + self.divider + '\n')
 
             # Get the url of the presentation
             self.presentation_url = input("Please enter the url of the presentation to use for the kiosk: ")
@@ -25,28 +27,36 @@ class Setup():
             # Set the auto start and refresh features to off
             else:
                 self.user_autostart = ""
-            print('\n' + '-' * 20 + '\n')
+    
             if self.user_autostart:
                 self.auto_start(self.user_autostart, self.presentation_url)
-            print('\n' + '-' * 20 + '\n')
+
+            print('\n' + self.divider + '\n')
+            
             # Get the auto refresh interval in minutes.
             self.refresh_interval = input("Please enter the interval in minutes that you want the kiosk to refresh the Google Slides presentation: ")
             
             if self.refresh_interval:
                     self.refresh(self.refresh_interval, self.user_autostart)
-            print('\n' + '-' * 20 + '\n')    
+
+            print('\n' + self.divider + '\n')    
+            
             # Get the user for autologin        
             self.user_autologin = input("Please enter the user to enable auto login for: ")
 
             if self.user_autologin:
                 self.auto_login(self.user_autologin)
-            print('\n' + '-' * 20 + '\n')
+            
+            print('\n' + self.divider + '\n')
+            
             # Get user choice for auto updates
             self.choice_autoupdate = input("Would you like to enable automatic updates? (y/n) ")
 
             if self.choice_autoupdate and not "n" in self.choice_autoupdate and not "N" in self.choice_autoupdate:
                 self.auto_update()
-            print('\n' + '-' * 20 + '\n')
+            
+            print('\n' + self.divider + '\n')
+            
             print("The Creation Tool is finished.  Please restart to enable your selected features.")
 
     # This function makes the kiosk start automatically at user login
@@ -124,11 +134,11 @@ class Setup():
         cache = apt.Cache()
         package = cache[package_name]
         if not package.is_installed:
-            print('\n' + '-' * 20 + '\n')
+            print('\n' + self.divider + '\n')
             print("The " + package_name + "package is not installed.  Installing now...")
             subprocess.call(["pkexec", os.path.dirname(os.path.realpath("__file__")) + "/scripts/install-package.sh", package_name])
-            print('\n' + '-' * 20 + '\n')
-            
+            print('\n' + self.divider + '\n')
+
 if __name__ == '__main__':
     Setup(True)
     
