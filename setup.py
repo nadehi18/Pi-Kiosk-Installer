@@ -33,7 +33,7 @@ class Setup():
             # Get the user for autologin        
             self.user_autologin = input("Please enter the user to enable auto login for: ")
 
-             if self.user_autologin:
+            if self.user_autologin:
                 self.auto_login(self.user_autologin)
 
             # Get user choice for auto updates
