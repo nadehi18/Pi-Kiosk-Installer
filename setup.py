@@ -137,7 +137,7 @@ class Setup():
         package = cache[package_name]
         if not package.is_installed:
             print('\n' + self.divider + '\n')
-            print("The " + package_name + "package is not installed.  Installing now...")
+            print("The " + package_name + " package is not installed.  Installing now...")
             subprocess.call(["pkexec", os.path.dirname(os.path.realpath("__file__")) + "/scripts/install-package.sh", package_name])
             print('\n' + self.divider + '\n')
 
