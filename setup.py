@@ -2,6 +2,7 @@
 
 import os
 import subprocess
+import apt
 
 class Setup():
     def __init__(self, cli):
@@ -77,11 +78,15 @@ class Setup():
     # This function enables automatic updates.
     # It calls a shell script and enables it to run with root privileges.
     def auto_update(self):
+        self.ensure_package_installed("unattended-upgrades")
+        
         subprocess.call(["pkexec", os.path.dirname(os.path.realpath("__file__")) + "/scripts/enable-autoupdates.sh"])
 
     # This function adds a cronjob that refreshes the kiosk every so many minutes.
     # It requires root privileges to actually update the selected users crontab.
     def refresh(self, interval, user):
+        self.ensure_package_installed("xdotool")
+        
         directory = "/home/" + user
         filename =  directory + "/.refresh-kiosk.sh"
         opened = False
@@ -115,6 +120,15 @@ class Setup():
         subprocess.call(["pkexec", os.path.dirname(os.path.realpath("__file__")) + "/scripts/install-crontab.sh", user, filename, int(interval), refresh_filename])
 
         os.remove(filename)
+
+    def ensure_package_installed(self, package_name):
+        cache = apt.cache.Cache()
+        cache.update()
+        cache.open()
+        package = cache[package_name]
+        if not package.is_installed:
+            print("The " + package_name + "package is not installed.  Installing now...")
+            subprocess.call(["pkexec", "apt", "update", "&&", "apt", "install", package-name, "-y"])
 
 if __name__ == '__main__':
     Setup(True)
