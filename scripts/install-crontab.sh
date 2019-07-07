@@ -6,9 +6,9 @@
 # The interval in minutes for the cron job as the third argument.
 # And the filename of the script as the fourth argument.
 
-$a=1
+declare -i a=1
 
-if [ "$3" -gt "$a" ]; then
+if [ $3 -gt $a ]; then
     su $1 -c "echo \"*/$3 * * * *  $4\" > $2" 
 else
     su $1 -c "echo \"* * * * *  $4\" > $2"
