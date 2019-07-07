@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import os
-from subprocess import Popen
+import subprocess
 
 class Setup():
     def __init__(self):
@@ -67,12 +67,12 @@ class Setup():
     # This function makes the selected user auto login.
     # It calls a shell script and enables it to run with root privileges.
     def autologin(self, user):
-        Popen(["pkexec", os.path.dirname(os.path.realpath("__file__")) + "/enable-autologin.sh", user])
+        subprocess.call(["pkexec", os.path.dirname(os.path.realpath("__file__")) + "/enable-autologin.sh", user])
 
     # This function enables automatic updates.
     # It calls a shell script and enables it to run with root privileges.
     def autoupdate(self):
-        Popen(["pkexec", os.path.dirname(os.path.realpath("__file__")) + "/enable-autoupdates.sh"])
+        subprocess.call(["pkexec", os.path.dirname(os.path.realpath("__file__")) + "/enable-autoupdates.sh"])
 
     # This function adds a cronjob that refreshes the kiosk every so many minutes.
     # It requires root privileges to actually update the selected users crontab.
@@ -92,7 +92,7 @@ class Setup():
         refresh_file.write("DISPLAY=:0 xdotool getactivewindow key F5")
         refresh_file.close()
 
-        Popen(['chmod', "+x", filename])
+        subprocess.Popen(['chmod', "+x", filename])
         
         refresh_filename = filename
 
@@ -112,7 +112,7 @@ class Setup():
             cron_file.write("* * * * *  " + refresh_filename + '\n')
         cron_file.close()
 
-        Popen(["pkexec", "crontab", "-u ", user, filename])
+        subprocess.call(["pkexec", "crontab", "-u ", user, filename])
 
 print("Welcome to the Raspberry Pi Kiosk Creation Tool!")
 print("If you do not wish to enable a feature, just leave the prompt blank and press [ENTER].")
