@@ -112,7 +112,9 @@ class Setup():
             cron_file.write("* * * * *  " + refresh_filename + '\n')
         cron_file.close()
 
-        subprocess.call(["pkexec", "crontab", "-u" + user, filename])
+        subprocess.call(["pkexec", os.path.dirname(os.path.realpath("__file__")) + "/install-crontab.sh", user, filename])
+
+        os.remove(filename)
 
 print("Welcome to the Raspberry Pi Kiosk Creation Tool!")
 print("If you do not wish to enable a feature, just leave the prompt blank and press [ENTER].")
