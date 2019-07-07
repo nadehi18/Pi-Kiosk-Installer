@@ -126,7 +126,7 @@ class Setup():
         package = cache[package_name]
         if not package.is_installed:
             print("The " + package_name + "package is not installed.  Installing now...")
-            subprocess.call(["pkexec", "apt", "update", "&&", "apt", "install", package-name, "-y"])
+            subprocess.call(["pkexec", "apt", "update", "&&", "apt", "install", package_name, "-y"])
 
 if __name__ == '__main__':
     Setup(True)

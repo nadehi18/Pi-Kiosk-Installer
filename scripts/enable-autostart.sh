@@ -1,6 +1,6 @@
 #!/bin/bash
 
-su -u $3
+su $3
 
 echo "[Desktop Entry]" > $1
 echo "Type=Application" >> $1

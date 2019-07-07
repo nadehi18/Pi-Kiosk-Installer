@@ -1,6 +1,6 @@
 #!/bin/bash
 
-su -u $2
+su $2
 
 echo "#!/bin/bash" > $1
 echo "DISPLAY=:0 xdotool getactivewindow key F5" >> $1
