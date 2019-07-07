@@ -5,9 +5,9 @@
 # This script MUST be run as root or else it will not work, at all.
 
 
-match="\[Seat\:\*\]"
+match="\<\[Seat\:\*\]\>"
 insert="autologin-user=$1"
 file="/etc/lightdm/lightdm.conf"
 sed -i "/autologin-user/d" $file
-sed "s/<$match>/<$match>\n$insert/" $file
+sed "s/$match/$match\n$insert/" $file
 dpkg-reconfigure lightdm 
