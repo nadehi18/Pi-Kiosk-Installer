@@ -100,9 +100,9 @@ class Setup():
         refresh_file.close()
 
         if user == os.getenv("USER"):
-             subprocess.call([os.path.dirname(os.path.realpath("__file__")) + "//scriptsenable-refresh.sh", filename, user])
+             subprocess.call([os.path.dirname(os.path.realpath("__file__")) + "/scripts/enable-refresh.sh", filename, user])
         else:    
-            subprocess.call(["pkexec", os.path.dirname(os.path.realpath("__file__")) + "//scriptsenable-refresh.sh", filename, user])
+            subprocess.call(["pkexec", os.path.dirname(os.path.realpath("__file__")) + "/scripts/enable-refresh.sh", filename, user])
         
         refresh_filename = filename
 
@@ -126,7 +126,7 @@ class Setup():
         package = cache[package_name]
         if not package.is_installed:
             print("The " + package_name + "package is not installed.  Installing now...")
-            subprocess.call(["pkexec", "apt update && apt install " + package_name + " -y"])
+            subprocess.call(["pkexec", os.path.dirname(os.path.realpath("__file__")) + "/scripts/install-package.sh", package_name])
 
 if __name__ == '__main__':
     Setup(True)
