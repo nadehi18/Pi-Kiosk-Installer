@@ -112,6 +112,7 @@ class Setup():
             cron_file.write("* * * * *  " + refresh_filename + '\n')
         cron_file.close()
 
+        print(user)
         subprocess.call(["pkexec", "crontab", "-u ", user, filename])
 
 print("Welcome to the Raspberry Pi Kiosk Creation Tool!")
