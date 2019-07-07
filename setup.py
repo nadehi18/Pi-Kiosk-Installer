@@ -72,17 +72,11 @@ class Setup():
     # This function makes the kiosk start automatically at user login
     def auto_start(self, user, url):
 
+        extension = ".desktop"
         directory = "/home/" + user + "/.config/autostart"
-        filename = directory + "/kiosk.desktop"
-        opened = False
-    
-        # Creates a desktop file in the autostart dir to run the kiosk automatically
-        # Checks if the default filename exists and if it does, the program 
-        while not opened:
-            if os.path.isfile(filename):
-                filename = directory + "/" + input("ERROR: File " + filename + "exists.  Please enter new filename: ") + ".desktop"
-            else:
-                opened = True
+        filename = directory + "/kiosk" + extension
+        
+        filename = self.check_file_exists(filename, directory, extension)
 
         subprocess.call(["pkexec", os.path.dirname(os.path.realpath("__file__")) + "/scripts/enable-autostart.sh", filename, url, user])
 
@@ -104,28 +98,20 @@ class Setup():
     def refresh(self, interval, user):
         self.ensure_package_installed("xdotool")
         
+        extension = ".sh"
         directory = "/home/" + user
-        filename =  directory + "/.refresh-kiosk.sh"
-        opened = False
-
-        while not opened:
-            if os.path.isfile(filename):
-                filename = directory + "/." + input("ERROR: File " + filename + "exists.  Please enter new filename: ") + ".sh"
-            else:
-                opened = True
+        filename = directory + "/.refresh-kiosk" + extension
+        
+        filename = self.check_file_exists(filename, directory, extension)
 
         subprocess.call(["pkexec", os.path.dirname(os.path.realpath("__file__")) + "/scripts/enable-refresh.sh", filename, user])
         
         refresh_filename = filename
 
-        opened = False
-        filename =  directory + "/.cronkiosk"
-
-        while not opened:
-            if os.path.isfile(filename):
-                filename = directory + "/." + input("ERROR: File " + filename + " exists.  Please enter new filename: ")
-            else:
-                opened = True
+        extension = ""
+        filename = directory + "/.cronkiosk" + extension
+        
+        filename = self.check_file_exists(filename, directory, extension)
 
         subprocess.call(["pkexec", os.path.dirname(os.path.realpath("__file__")) + "/scripts/install-crontab.sh", user, filename, str(interval), refresh_filename])
 
@@ -134,17 +120,11 @@ class Setup():
     def auto_hide_mouse(self, user):
         self.ensure_package_installed("unclutter")
 
+        extension = ".desktop"
         directory = "/home/" + user + "/.config/autostart"
-        filename = directory + "/unclutter.desktop"
-        opened = False
-    
-        # Creates a desktop file in the autostart dir to hide the cursor automatically
-        # Checks if the default filename exists and if it does, the program prompts to rename the files 
-        while not opened:
-            if os.path.isfile(filename):
-                filename = directory + "/" + input("ERROR: File " + filename + "exists.  Please enter new filename: ") + ".desktop"
-            else:
-                opened = True
+        filename = directory + "/unclutter" + extension
+
+        filename = self.check_file_exists(filename, directory, extension)
 
         subprocess.call(["pkexec", os.path.dirname(os.path.realpath("__file__")) + "/scripts/enable-hidecursor.sh", filename, user])
 
@@ -156,6 +136,25 @@ class Setup():
             print("The " + package_name + " package is not installed.  Installing now...")
             subprocess.call(["pkexec", os.path.dirname(os.path.realpath("__file__")) + "/scripts/install-package.sh", package_name])
             print('\n' + self.divider + '\n')
+    
+    def check_file_exists(self, filename, directory, extension):
+        opened = False
+    
+        # Checks if the default filename exists and if it does, the program prompts to overwrite or rename the files 
+        while not opened:
+            if os.path.isfile(filename):
+                replace = input("ERROR: File " + filename + "exists.  Would you like to replace? (y/n)")
+                if not "n" in replace:
+                    opened = True
+                else:
+                    name = input("Please enter new filename: ")
+                    if name = "":
+                        name = "_"
+                    filename = directory + name + extension
+            else:
+                opened = True
+    
+        return filename
 
 if __name__ == '__main__':
     Setup(True)
