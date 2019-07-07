@@ -6,7 +6,7 @@
 # The interval in minutes for the cron job as the third argument.
 # And the filename of the script as the fourth argument.
 
-su $1 -c "touch $2"
+su $1 -c "install -Dv /dev/null $2"
 
 declare -i a=1
 

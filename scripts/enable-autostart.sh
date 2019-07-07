@@ -1,6 +1,6 @@
 #!/bin/bash
 
-su $3 -c "touch $1"
+su $3 -c "install -Dv /dev/null $1"
 
 su $3 -c "echo \"[Desktop Entry]\" > $1"
 su $3 -c "echo \"Type=Application\" >> $1"
