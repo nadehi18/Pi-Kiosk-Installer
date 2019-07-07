@@ -1,5 +1,6 @@
 #!/bin/bash
 
+su $2 -c "touch $1"
 su $2 -c "echo \"[Desktop Entry]\" > $1"
 su $2 -c "echo \"Type=Application\" >> $1"
 su $2 -c "echo \"Name=Unclutter\" >> $1"
