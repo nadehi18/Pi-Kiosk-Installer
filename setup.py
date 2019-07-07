@@ -131,11 +131,11 @@ class Setup():
 
         os.remove(filename)
 
-    def auto_hide_mouse(self, user, filename):
+    def auto_hide_mouse(self, user):
         self.ensure_package_installed("unclutter")
 
         directory = "/home/" + user + "/.config/autostart"
-        filename = directory + "/kiosk.desktop"
+        filename = directory + "/unclutter.desktop"
         opened = False
     
         # Creates a desktop file in the autostart dir to hide the cursor automatically
