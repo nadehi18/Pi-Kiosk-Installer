@@ -1,8 +1,12 @@
 #!/bin/bash
 
-# This script enables auto login on Raspbian (Or any linux distro that uses lightdm).
+# This script enables auto login on Raspbian (Or any Linux distro that uses LightDM).
 # It takes the name of the user to auto login to as an argument. 
-# This script MUST be run as root or else it will not work, at all.
+# This script must be run as root or else it will not work at all.
+
+# The script inserts "autologin-user=specified_user" directly under the line that contains [Seat:*].
+# The script also removes any other autologin-user line to prevent conflicts.
+# Lastly the script reconfigures LightDM to enable the auto login.
 
 
 match="\[Seat\:\*\]"
